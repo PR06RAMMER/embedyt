@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>EmbedYT</title>
+        <style>
+            .consolas_blue {
+                font-family: 'Consolas', monospace;
+                color: blue;
+            }
+            body {
+                font-family: 'Consolas', monospace;
+            }
+        </style>
+        <script>
+            function zmenEmbedVideo() {
+                var idVidea = document.getElementById('vstup').value.trim();
+                var surovaDomena = document.getElementById('sdvstup') ? document.getElementById("sdvstup").value.trim() : '';
+                
+                if (!surovaDomena) {
+                    surovaDomena = 'https://youtube-nocookie.com';
+                }
+
+                if (surovaDomena && !surovaDomena.endsWith('/')) {
+                    surovaDomena += '/';
+                }
+                
+                var finalnaAdresa = surovaDomena + idVidea + "?hl=en";
+                console.log("iframe embed domain:: ", finalnaAdresa);
+
+                var iframe = document.getElementById('mojIframe');
+                
+                if (iframe) {
+                    iframe.src = finalnaAdresa;
+                    console.log("success");
+                } else {
+                    console.error("error 1");
+                }
+            }
+        </script>
+    </head>    
+    <body>
+        <div class="header">
+            <h1 class="consolas_blue">
+                XDXD<span style="color:silver">EmbedYoutube</span>
+            </h1>
+        </div>
+        <div class="buttoninp">
+            <input type="text" placeholder="Youtube video uuid" id="vstup">
+            <input type="text" placeholder="Enter raw domain (optional)" id="sdvstup">
+            <button onclick="zmenEmbedVideo()">change</button>
+            <button onclick="rawPage('mojIframe', 'sdvstup')">change raw domain</button>
+        </div>
+        <div class="video">
+            <iframe id="mojIframe" width="560" height="315" src="about:blank" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+        <div class="help">
+            <h2>Need help?</h2>
+                <pre style="font-family: 'Consolas', monospace;">
+                A video uuid is an eleven-digit code like this:
+                youtube.com/watch/11digitcode
+                                  ^          ^
+
+                                  |__________|
+                </pre>
+        </div>
+    </body>
+</html>
